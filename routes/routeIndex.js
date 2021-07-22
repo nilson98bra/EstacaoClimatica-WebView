@@ -39,7 +39,7 @@ router.get('/:start/:end/',(req,res,next)=>{
             title: "Home",
             start:start,
             end:end,
-            result: result
+            result: JSON.stringify(result)
         });
     })
     
