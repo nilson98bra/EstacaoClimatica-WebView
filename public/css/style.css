@@ -1,11 +1,11 @@
 #graphic{
-    
+    display: flex;
+    align-self: center;
+    justify-self: center;
     align-items: center;
     justify-content:flex-start;
-    display: flex;
     flex-direction: column;
     background-color: var(--branco);  
-
     padding: 10px;
     z-index: 23;
     transition: 0.5s ease-in-out;
