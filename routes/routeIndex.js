@@ -13,7 +13,7 @@ let values = new Array();
     });
     const temperatura = await influxdb.query(
     { orgID: '0f616107822aece2' },
-    { query: `from(bucket: "measurements") |> range(start: 2021-06-29T00:55:00Z, stop: 2021-06-29T00:59:00Z) |> filter(fn: (r) => r._measurement == "mqtt_consumer" and r._field == "payload_fields_temperatura" )` }    
+    { query: `from(bucket: "measurements") |> range(start: ${start}, stop: ${end}) |> filter(fn: (r) => r._measurement == "mqtt_consumer" and r._field == "payload_fields_temperatura" )` }    
 );
 
     temperatura[0].map((atual)=>{
