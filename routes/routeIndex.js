@@ -12,7 +12,7 @@ async function values(start,end,param) {
         token: 'cVyV1G8DxT1jGK6wS--Ibvbe1TNPsYtgOOeON1Rv07gVc4_0wGn0U9I3SseENzi-IT1XmqPnm6ubugQ_8Hh6qw=='
     });
         let result
-        if(param === "Temperatura(°)"){
+        if(param === "Temperatura"){
 
             const valores = await influxdb.query(
                 { orgID: '0f616107822aece2' },
@@ -25,7 +25,7 @@ async function values(start,end,param) {
             }
             })
         }
-        else if(param === "UmidadedoAr(%)"){
+        else if(param === "Umidade do Ar"){
             const valores = await influxdb.query(
                 { orgID: '0f616107822aece2' },
                 { query: `from(bucket: "measurements") |> range(start: ${start}, stop: ${end}) |> filter(fn: (r) => r._measurement == "mqtt_consumer" and r._field == "payload_fields_umidade" )` }    
