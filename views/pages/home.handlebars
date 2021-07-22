@@ -1,4 +1,11 @@
 <div id="graphic">
+    <h1>{{ start }}</h1>
+    <h1>{{ end }}</h1>
+    {{#each values}}
+        <h1>{{data}} - {{valor}}</h1>
+        {{else}}
+        <p class="empty">No content</p>
+    {{/each}}
     <canvas id="chart"></canvas>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.0/chart.min.js"></script>
         <script>

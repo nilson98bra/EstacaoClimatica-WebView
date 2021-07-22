@@ -1,13 +1,11 @@
 #graphic{
-    position: fixed;
+    
     align-items: center;
     justify-content:flex-start;
     display: flex;
     flex-direction: column;
-    background-color: var(--branco);
-    top:50%;
-    right: 50%;
-    transform: translate(50%,-50%);
+    background-color: var(--branco);  
+
     padding: 10px;
     z-index: 23;
     transition: 0.5s ease-in-out;
