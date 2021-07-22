@@ -1,10 +1,11 @@
+const { DatasetController } = require('chart.js');
 const express = require('express'); 
 const router = express.Router();
 const Influxdb = require('influxdb-v2');
 const Moment = require('moment');
 async function values(start,end) {
 let values = new Array();
-    console.log(`${start} - ${end}`)
+let dates = new Array();
     const influxdb = new Influxdb({
         host: '52.191.8.121',
         port: 8086,
@@ -16,15 +17,15 @@ let values = new Array();
     { query: `from(bucket: "measurements") |> range(start: ${start}, stop: ${end}) |> filter(fn: (r) => r._measurement == "mqtt_consumer" and r._field == "payload_fields_temperatura" )` }    
 );
 
-    temperatura[0].map((atual)=>{
-        values.push({
-            data: Moment(atual["_time"]).format('DD/MM/YYYY HH:mm'),
-            valor: atual["_value"],
-
-        })
+      let result = temperatura[0].map((atual,index)=>{
+        return {
+            x:Moment(atual["_time"]).format('DD/MM/YYYY HH:mm'),
+            y:atual["_value"]
+        }
+         
     })
 
-return values
+return result
 
 }
  
@@ -38,7 +39,7 @@ router.get('/:start/:end/',(req,res,next)=>{
             title: "Home",
             start:start,
             end:end,
-            values: result
+            result: result
         });
     })
     
