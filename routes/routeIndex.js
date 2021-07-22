@@ -4,8 +4,7 @@ const router = express.Router();
 const Influxdb = require('influxdb-v2');
 const Moment = require('moment');
 async function values(start,end) {
-let values = new Array();
-let dates = new Array();
+
     const influxdb = new Influxdb({
         host: '52.191.8.121',
         port: 8086,
@@ -31,7 +30,7 @@ return result
  
   
 
-router.get('/:start/:end/',(req,res,next)=>{
+router.get('/:start/:end/',(req,res)=>{
     let start = req.params.start
     let end = req.params.end 
     values(start,end).then((result)=>{
