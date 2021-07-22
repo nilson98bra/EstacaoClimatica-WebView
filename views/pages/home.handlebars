@@ -1,7 +1,8 @@
-<div id="graphic">
-
+<div id="container">
+    <div id="graphic">
     <canvas id="chart"></canvas>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.0/chart.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-zoom/1.0.0-beta.1/chartjs-plugin-zoom.min.js" integrity="sha512-gxl+EpgXXP6j07EcF5p9W/hw0oi4iU8UyFnRgshnLX3zqEVZiOA54FioSv1KTVUSQVLTlrVyghoq3McdoU/3zg==" crossorigin="anonymous"></script>
         <script>
             var ctx = document.getElementById('chart')
 
@@ -10,7 +11,7 @@
                 data: {
                
                     datasets: [{
-                        label: 'My First Dataset',
+                        label: {{{parametro}}},
                         data: {{{result}}},
                         fill: false,
                         borderColor: 'rgb(75, 192, 192)',
@@ -18,9 +19,26 @@
                     }]
                 },
                 options:{
+                    plugins: {
+                        zoom: {
+                            pan: {
+                                enabled: true,
+                                modifierKey: 'ctrl',
+                            },
+                            zoom: {
+                                enabled: true,
+                                mode: 'xy',
+                                drag: {
+                                enabled: true,
+                            },                     
+                      },
+                    },
+                },
                     responsive: true,
                     maintainAspectRatio: false,
                 }
             });
         </script>
 </div>
+</div>
+

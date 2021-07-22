@@ -30,15 +30,17 @@ return result
  
   
 
-router.get('/:start/:end/',(req,res)=>{
+router.get('/:parametro/:start/:end/',(req,res)=>{
     let start = req.params.start
     let end = req.params.end 
+    let param = req.params.parametro
     values(start,end).then((result)=>{
         res.render('../views/pages/home',{
             title: "Home",
             start:start,
             end:end,
-            result: JSON.stringify(result)
+            result: JSON.stringify(result),
+            parametro: JSON.stringify(param)
         });
     })
     
