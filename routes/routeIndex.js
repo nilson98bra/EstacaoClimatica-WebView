@@ -61,9 +61,9 @@ router.get('/:parametro/:start/:end/',(req,res)=>{
     let end = req.params.end 
     let param = req.params.parametro
     values(start,end,param).then((result)=>{
-        if(param === "Temperatura"){
+        if(param == "Temperatura"){
             param = param + " (°)"
-        }else if(param === "Umidade do Ar"){
+        }else if(param == "Umidade do Ar"){
             param = param + " (%)"
         }else{
             param = param + " (hPa)"
