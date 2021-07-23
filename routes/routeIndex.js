@@ -16,7 +16,7 @@ async function values(start,end,param) {
 
             const valores = await influxdb.query(
                 { orgID: '0f616107822aece2' },
-                { query: `from(bucket: "measurements") |> range(start: ${start}, stop: ${end}) |> filter(fn: (r) => r._measurement == "mqtt_consumer" and r._field == "payload_fields_temperatura" )` }    
+                { query: `from(bucket: "measurements") |> range(start: ${start}, stop: ${end}) |> filter(fn: (r) => r._measurement == "mqtt_consumer" and r._field == "uplink_message_decoded_payload_temperatura" )` }    
             );
             result = valores[0].map((atual,index)=>{
             return {
@@ -28,7 +28,7 @@ async function values(start,end,param) {
         else if(param === "Umidade do Ar"){
             const valores = await influxdb.query(
                 { orgID: '0f616107822aece2' },
-                { query: `from(bucket: "measurements") |> range(start: ${start}, stop: ${end}) |> filter(fn: (r) => r._measurement == "mqtt_consumer" and r._field == "payload_fields_umidade" )` }    
+                { query: `from(bucket: "measurements") |> range(start: ${start}, stop: ${end}) |> filter(fn: (r) => r._measurement == "mqtt_consumer" and r._field == "uplink_message_decoded_payload_umidade" )` }    
             );
             result = valores[0].map((atual,index)=>{
             return {
@@ -40,7 +40,7 @@ async function values(start,end,param) {
         else{
             const valores = await influxdb.query(
                 { orgID: '0f616107822aece2' },
-                { query: `from(bucket: "measurements") |> range(start: ${start}, stop: ${end}) |> filter(fn: (r) => r._measurement == "mqtt_consumer" and r._field == "payload_fields_pressao" )` }    
+                { query: `from(bucket: "measurements") |> range(start: ${start}, stop: ${end}) |> filter(fn: (r) => r._measurement == "mqtt_consumer" and r._field == "uplink_message_decoded_payload_pressao" )` }    
             );
             result = valores[0].map((atual,index)=>{
             return {
