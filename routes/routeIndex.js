@@ -3,9 +3,44 @@ const express = require('express');
 const router = express.Router();
 const Influxdb = require('influxdb-v2');
 const Moment = require('moment');
+function generateValues(nNumbers){
+    const values = Array.from(Array(nNumbers).keys()).map(()=>{
+      return Math.floor(Math.random() * nNumbers)
+  })
+  return values
+  }
+  
+  
+  
+  
+  function getDates (startDate, nDays) {
+    const dates = []
+    let aux=0
+    for(let i=0; i<nDays; i++){
+    
+          let day = Moment(Moment(startDate, "DD-MM-YYYY").add(i, 'minutes')).format("YYYY-MM-DD HH:mm:ss")
+          dates.push(day)
+        }
+      
+      
+    return dates
+  }
+  
+  // Usage
+
+async function valuesTest(){
+    const dates = getDates(new Date("2017-06-22"), 240)
+    const values = generateValues(240)
+    const result = dates.map((curr,index)=>{
+        return {x: curr,
+                y: values[index]}
+    })
+    return result
+}
 async function values(start,end,param) {
 
-    const influxdb = new Influxdb({
+   
+   /* const influxdb = new Influxdb({
         host: '52.191.8.121',
         port: 8086,
         protocol: 'http',
@@ -48,7 +83,7 @@ async function values(start,end,param) {
                 y:atual["_value"]
             }
             })
-        }
+        }*/
 
 return result
 
@@ -56,11 +91,13 @@ return result
  
   
 
-router.get('/:parametro/:start/:end/',(req,res)=>{
+router.get('/:parametro/:start/:end',(req,res)=>{
     let start = req.params.start
     let end = req.params.end 
     let param = req.params.parametro
-    values(start,end,param).then((result)=>{
+    let x = req.params.x
+    let y = req.params.y
+    /*values(start,end,param).then((result)=>{
         if(param == "Temperatura"){
             param = param + " (°)"
         }else if(param == "Umidade do Ar"){
@@ -75,9 +112,20 @@ router.get('/:parametro/:start/:end/',(req,res)=>{
             result: JSON.stringify(result),
             parametro: JSON.stringify(param)
         });
+    })*/
+
+    valuesTest(start,end,param).then((result)=>{
+       
+        res.render('../views/pages/home',{
+            title: "Home",
+            start:start,
+            end:end,
+            result: JSON.stringify(result),
+            parametro: JSON.stringify(param)
+        });
     })
-    
- 
+
+
 });
 
 module.exports = router
